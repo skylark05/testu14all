@@ -16,8 +16,8 @@ services:
  - sqlite
 build:
  pre_ci_boot:
-  image_name: drydock/u14all
-  image_tag: ragesh
+  image_name: drydock/u14pytall
+  image_tag: prod
   pull: false
  ci:
   - cqlsh -e "describe cluster; describe tables"
