@@ -1,0 +1,71 @@
+language: none
+#services:
+# - cassandra
+# - couchdb
+# - elasticsearch
+# - memcached
+# - mongodb
+# - mysql
+# - neo4j
+# - postgres
+# - redis
+# - rethinkdb
+# - riak
+# - selenium
+# - sqlite
+build:
+ pre_ci_boot:
+  image_name: drydock/u14all
+  image_tag: ragesh
+  pull: false
+ ci:
+  - shippable_service cassandra start
+  - cqlsh -e "describe cluster; describe tables"
+  - shippable_service cassandra stop
+  
+  - shippable_service couchdb start
+  - curl localhost:5984
+  - shippable_service couchdb stop
+  
+  - shippable_service elasticsearch start
+  - curl localhost:9200
+  - shippable_service elasticsearch stop
+  
+  - shippable_service memcached start
+  - (echo stats; echo quit) | nc 127.0.0.1 11211
+  - shippable_service memcached stop
+  
+  - shippable_service mongodb start
+  - mongo --eval "db.stats()"
+  - shippable_service mongodb stop
+  
+  - shippable_service mysql start
+  - mysql -e "show databases;"
+  - shippable_service mysql stop
+  
+  - shippable_service neo4j start
+  - curl localhost:7474
+  - shippable_service neo4j stop
+  
+  - shippable_service postgres start
+  - sudo su postgres -c "psql -c '\l'"
+  - shippable_service postgres stop
+  
+  - shippable_service rabbitmq start
+  - rabbitmqctl status
+  - shippable_service rabbitmq stop
+  
+  - shippable_service redis start
+  - (echo "INFO"; echo -e "\nQUIT") | nc 127.0.0.1 6379
+  - shippable_service redis stop
+  
+  - shippable_service rethinkdb start
+  - shippable_service rethinkdb stop
+  
+  - shippable_service riak start
+  - riak-admin status
+  - shippable_service riak stop
+  
+  - shippable_service selenium start
+  - curl --head http://localhost:4444
+  - shippable_service selenium stop
