@@ -20,7 +20,7 @@ build:
   image_tag: prod
   pull: false
  ci:
-  - cqlsh -e "describe cluster; describe tables"
+  #- cqlsh -e "describe cluster; describe tables"
   - curl localhost:5984
   - curl localhost:9200
   - (echo stats; echo quit) | nc 127.0.0.1 11211
