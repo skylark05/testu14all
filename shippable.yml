@@ -1,6 +1,6 @@
 language: none
 services:
- - cassandra
+# - cassandra
  - couchdb
  - elasticsearch
  - memcached
