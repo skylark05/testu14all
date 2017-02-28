@@ -16,8 +16,8 @@ language: none
 build:
  pre_ci_boot:
   image_name: drydock/u14all
-  image_tag: ragesh
-  pull: false
+  image_tag: master
+  pull: pull
  ci:
   - shippable_service cassandra start
   - cqlsh -e "describe cluster; describe tables"
